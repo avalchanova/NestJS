@@ -31,13 +31,16 @@ let UserController = class UserController {
     getUserComments(id) {
         return this.commentService.findUserComments(id);
     }
+    update(id, updateUserDto) {
+        return this.userService.update(id, updateUserDto);
+    }
 };
 exports.UserController = UserController;
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)(":id"),
+    __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "findOne", null);
 __decorate([
@@ -48,14 +51,23 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)(':id/comments'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)(":id/comments"),
+    __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "getUserComments", null);
+__decorate([
+    (0, common_1.Put)(":id"),
+    __param(0, (0, common_1.Param)("id")),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, createUserDto_1.UpdateUserDto]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "update", null);
 exports.UserController = UserController = __decorate([
-    (0, common_1.Controller)('user'),
-    __metadata("design:paramtypes", [user_service_1.UserService, comment_service_1.CommentService])
+    (0, common_1.Controller)("user"),
+    __metadata("design:paramtypes", [user_service_1.UserService,
+        comment_service_1.CommentService])
 ], UserController);
 //# sourceMappingURL=user.controller.js.map
