@@ -1,17 +1,26 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './DTO/createUserDto';
+import { Injectable } from "@nestjs/common";
+import { CreateUserDto, UpdateUserDto } from "./DTO/createUserDto";
+import { InjectRepository } from "@nestjs/typeorm";
+import { User } from "src/entities/user.entity";
+import { Repository } from "typeorm";
 
 @Injectable() //injectable means that this UserService is now a provider
 // providers inside nestjs can be injected inside other inside the module scope
 export class UserService {
-  findOne(id: string) {
-    return {
-      id: id,
-    };
+  constructor(
+    @InjectRepository(User) private readonly userRepo: Repository<User>
+  ) {}
+  async findOne(id: number) {
+    return await this.userRepo.findOne({ where: { id: id } });
   }
 
-  create(createUseDto: CreateUserDto){
-    return 'the user is created';
+  async create(createUserDto: CreateUserDto) {
+    const user = await this.userRepo.create(createUserDto);
+    return await this.userRepo.save(user);
+  }
+
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    return await this.userRepo.update(id, updateUserDto);
   }
 }
 
